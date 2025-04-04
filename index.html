@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Test</title>
+</head>
+<body>
+    <h1>Item Test</h1>
+
+    <h2>Fetch Items</h2>
+    <button onclick="fetchItems()">Fetch Items</button>
+    <div id="items"></div>
+
+    <h2>Create Item</h2>
+    <form id="createItemForm">
+        <input type="text" id="itemName" placeholder="Item Name" required>
+        <input type="text" id="itemDescription" placeholder="Item Description" required>
+        <input type="number" id="itemPriceSmall" placeholder="Item Price Small" required>
+        <input type="number" id="itemPriceMedium" placeholder="Item Price Medium" required>
+        <input type="number" id="itemPriceLarge" placeholder="Item Price Large" required>
+        <input type="text" id="itemCategory" placeholder="Item Category" required>
+        <input type="text" id="itemSubcategory" placeholder="Item Subcategory">
+        <input type="text" id="itemImageUrl" placeholder="Item Image URL">
+        <select id="itemIsAvailable">
+            <option value="1">Available</option>
+            <option value="0">Not Available</option>
+        </select>
+        <button type="submit">Create Item</button>
+    </form>
+    <div id="createItemResponse"></div>
+
+    <script>
+        const apiUrl = 'http://localhost/expresso-cafe/api/items';
+
+        function fetchItems() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const itemsDiv = document.getElementById('items');
+                    itemsDiv.innerHTML = '<h3>Items:</h3>';
+                    data.forEach(item => {
+                        itemsDiv.innerHTML += `<p>${item.name} - ${item.description} - Small: $${item.price_small}, Medium: $${item.price_medium}, Large: $${item.price_large} - Category: ${item.category} - Subcategory: ${item.subcategory} - Available: ${item.is_available} - Image: <img src="${item.image_url}" alt="${item.name}" width="50"></p>`;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching items:', error);
+                    document.getElementById('items').innerHTML = '<p>Error fetching items.</p>';
+                });
+        }
+
+        document.getElementById('createItemForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('itemName').value;
+            const description = document.getElementById('itemDescription').value;
+            const price_small = document.getElementById('itemPriceSmall').value;
+            const price_medium = document.getElementById('itemPriceMedium').value;
+            const price_large = document.getElementById('itemPriceLarge').value;
+            const category = document.getElementById('itemCategory').value;
+            const subcategory = document.getElementById('itemSubcategory').value;
+            const image_url = document.getElementById('itemImageUrl').value;
+            const is_available = document.getElementById('itemIsAvailable').value;
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, description, price_small, price_medium, price_large, category, subcategory, is_available, image_url })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('createItemResponse').innerHTML = '<p>Item created successfully.</p>';
+                    fetchItems(); // Refresh the item list
+                })
+                .catch(error => {
+                    console.error('Error creating item:', error);
+                    document.getElementById('createItemResponse').innerHTML = '<p>Error creating item.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

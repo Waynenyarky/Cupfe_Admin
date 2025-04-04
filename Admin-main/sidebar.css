@@ -1,0 +1,150 @@
+/* Sidebar Styling */
+.dashboard-container .sidebar {
+    width: 260px;
+    background: linear-gradient(to bottom, #8b5e3c, #4b2e1f); /* Gradient from normal brown to very dark brown */
+    color: #ffffff; /* White text for contrast */
+    position: relative; /* For absolute positioning of the button */
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #5c3a2a; /* Dark brown border for bevel effect */
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset -2px -2px 5px rgba(255, 255, 255, 0.1); /* Inner shadow for bevel */
+    border-radius: 0; /* Remove rounded edges */
+    transition: width 0.5s ease, transform 0.5s ease; /* Smooth animation for collapsing */
+}
+
+/* Collapsed Sidebar */
+.dashboard-container .sidebar.collapsed {
+    width: 60px; /* Shrink the width for collapsed state */
+    transform: translateX(-10px); /* Subtle shift */
+}
+
+/* Sidebar Header Styling */
+.dashboard-container .sidebar-header {
+    padding: 5px;
+    text-align: center;
+    background: linear-gradient(to bottom, #9c6b4a, #5c3a2a); /* Gradient background */
+    border-bottom: 1px solid #d7ccc8;
+    position: relative; /* Ensure logo and button positioning */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth animations for fading */
+}
+
+/* Logo Styling */
+#logo {
+    width: 100%; /* Fit within the sidebar width */
+    max-width: 200px; /* Prevent the logo from being too large */
+    height: auto; /* Maintain aspect ratio */
+    transition: width 0.5s ease, opacity 0.5s ease; /* Smooth animation for collapsing */
+}
+
+/* Collapsed State for Logo */
+.dashboard-container .sidebar.collapsed #logo {
+    width: 40px; /* Shrink the logo width when collapsed */
+    opacity: 0.8; /* Slightly fade the logo */
+}
+
+/* Sidebar Toggle Button Styling */
+.sidebar-toggle-btn {
+    position: absolute; /* Positioned at the top-right */
+    top: 10px;
+    right: 10px; /* Adjust placement to avoid blocking the logo */
+    background-color: #5c3a2a; /* Dark brown background */
+    color: #ffffff; /* White icon color for contrast */
+    border: none; /* Remove default borders */
+    width: 40px; /* Square button dimensions */
+    height: 40px;
+    border-radius: 12px; /* Add rounded edges */
+    cursor: pointer; /* Pointer on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Ensure it appears above the logo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
+}
+
+/* Hover Effect for Toggle Button */
+.sidebar-toggle-btn:hover {
+    background-color: #8b5e3c; /* Lighter brown on hover */
+    transform: scale(1.1); /* Slight enlargement for emphasis */
+}
+
+/* Active/Click Effect */
+.sidebar-toggle-btn:active {
+    transform: scale(0.95); /* Slight shrinkage for click feedback */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+/* Admin Username Styling */
+.dashboard-container .sidebar-header .admin-username {
+    font-size: 16px; /* Slightly smaller than the logo */
+    margin-top: 10px; /* Space below the logo */
+    color: #d2b48c; /* Light coffee tone */
+    transition: opacity 0.5s ease; /* Smooth animation for fading */
+}
+
+.dashboard-container .sidebar.collapsed .sidebar-header .admin-username {
+    opacity: 0; /* Hide admin username when sidebar is collapsed */
+}
+
+/* Menu Styling */
+.dashboard-container .menu {
+    flex-grow: 1;
+    padding: 20px 0;
+    list-style: none;
+    transition: opacity 0.5s ease; /* Smooth animation for fading */
+}
+
+.dashboard-container .sidebar.collapsed .menu {
+    opacity: 0; /* Hide menu items when collapsed */
+}
+
+/* Menu Items */
+.dashboard-container .menu-item {
+    margin: 10px 20px;
+    border-radius: 12px; /* Increased border-radius for more rounded edges */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-container .menu-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #d7ccc8; /* Soft cream color */
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 12px; /* Ensure links inside menu items also have rounded edges */
+}
+
+.dashboard-container .menu-link i {
+    font-size: 18px;
+    margin-right: 12px;
+    transition: opacity 0.5s ease; /* Smooth animation for fading icons */
+}
+
+.dashboard-container .sidebar.collapsed .menu-link span {
+    display: none; /* Hide text when sidebar is collapsed */
+}
+
+.dashboard-container .menu-link:hover {
+    background: linear-gradient(to right, #9c6b4a, #4b2e1f); /* Gradient for hover from normal brown to very dark brown */
+    color: #ffffff; /* Bright white text on hover */
+}
+
+/* Active Menu Item */
+.dashboard-container .menu-item.active .menu-link {
+    background-color: #b07d5a; /* Solid normal brown for active state */
+    color: #ffffff;
+}
+
+/* Logout Link */
+.dashboard-container .menu-item:last-child .menu-link {
+    color: #f28c8c; /* Light red for logout */
+}
+
+.dashboard-container .menu-item:last-child .menu-link:hover {
+    background: linear-gradient(to right, #b07d5a, #4b2e1f); /* Gradient for logout hover from normal brown to very dark brown */
+    color: #c0392b;
+}

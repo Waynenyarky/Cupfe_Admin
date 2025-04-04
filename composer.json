@@ -1,0 +1,12 @@
+{
+    "require": {
+        "firebase/php-jwt": "^6.11",
+        "phpmailer/phpmailer": "^6.9",
+        "stripe/stripe-php": "^16.6",
+        "cboden/ratchet": "^0.5",
+        "ratchet/pawl": "^0.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
+}

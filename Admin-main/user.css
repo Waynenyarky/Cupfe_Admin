@@ -1,0 +1,368 @@
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f5ebe0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling when pop-ups are active */
+}
+
+
+/* Dashboard Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  flex-shrink: 0;
+  width: 260px;
+  height: 100%;
+  background-color: #6f4e37;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d7ccc8;
+  background-color: #8c5a43;
+  border-bottom: 1px solid #d7ccc8;
+}
+
+.menu {
+  flex-grow: 1;
+  padding: 20px 0;
+  list-style: none;
+  margin: 0;
+}
+
+.menu-item {
+  margin: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #d7ccc8;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.menu-link i {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.menu-link:hover {
+  background-color: #8c5a43;
+  color: #ffffff;
+}
+
+.menu-item.active .menu-link {
+  background-color: #d9a064;
+  color: #ffffff;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fdf8f4;
+  overflow-y: auto;
+}
+
+.main-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #6f4e37;
+}
+
+/* Controls Section */
+.user-controls-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Buttons: Add User, Fetch All */
+.user-action-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  background-color: #8c5a43; /* Dark brown consistent color */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.user-action-btn:hover {
+  background-color: #75412b; /* Slightly darker shade for hover */
+  transform: scale(1.05); /* Add subtle hover effect */
+}
+
+/* Dropdown Filters: Roles and Active Status */
+.user-filter-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  background-color: #fdf8f4;
+  font-size: 14px;
+  color: #6f4e37; /* Matches sidebar color for consistency */
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.user-filter-select:focus {
+  border-color: #8c5a43; /* Highlight when focused */
+  outline: none; /* Remove default outline */
+}
+
+/* Container for the search input and icon */
+.user-search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Style for the search input */
+.user-filter-search {
+  padding: 0.5em 2.5em 0.5em 0.5em; /* Add padding for the search icon */
+  margin-left: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus outline for the search input */
+.user-filter-search:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Style for the search icon */
+.user-search-icon {
+  position: absolute;
+  right: 10px;
+  color: #999;
+  font-size: 1.2em;
+  pointer-events: none; /* Prevents the icon from interfering with input focus */
+}
+
+/* User Items View */
+.user-items-container {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.user-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.user-item-details {
+  flex-grow: 1;
+}
+
+.user-item-details p:first-child {
+  font-size: 24px; /* Increase font size for usernames */
+  font-weight: bold; /* Make it bold for better emphasis */
+  color:#d9a064; /* Ensure the text color is clear and readable */
+  margin-bottom: 10px; /* Add spacing below the username */
+}
+
+.user-item-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-item-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Styling for Edit and Delete Buttons */
+.user-item-actions button {
+    background-color: #8c5a43; /* Brown color */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    padding: 15px; /* Increase padding for larger buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    width: 50px; /* Make buttons square */
+    height: 50px; /* Make buttons square */
+}
+
+.user-item-actions button i {
+    font-size: 20px; /* Adjust icon size */
+    color: #ffffff; /* White icon color for contrast */
+}
+
+.user-item-actions button.edit-btn:hover {
+    background-color: #4caf50; /* Green for edit button hover */
+}
+
+.user-item-actions button.delete-btn:hover {
+    background-color: #f44336; /* Red for delete button hover */
+}
+
+.user-item-actions button.edit-btn:hover i,
+.user-item-actions button.delete-btn:hover i {
+    color: #ffffff; /* Keep white icon color on hover */
+}
+
+/* Styling for Change Password Button */
+.user-item-actions button.change-password-btn {
+    background-color: #8c5a43; /* Brown color */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    padding: 10px 30px; /* Increase horizontal padding for longer shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px; /* Rounded rectangle */
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    font-size: 14px; /* Adjust font size */
+    color: #ffffff; /* White text color */
+    font-weight: bold; /* Bold text for emphasis */
+    min-width: 150px; /* Ensure the button is wide enough for the text */
+    text-align: center; /* Center-align the text */
+}
+
+.user-item-actions button.change-password-btn:hover {
+    background-color: #41abf1; /* Slightly darker shade for hover */
+    transform: scale(1.05); /* Add subtle hover effect */
+}
+
+/* Form Pop-Ups (Shared with Add/Edit User Form) */
+.user-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: #fdf8f4;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  display: none; /* Default hidden */
+}
+
+.user-form-container.hidden {
+  display: none; /* Default hidden with "hidden" class */
+}
+
+.user-form-container.visible {
+  display: block; /* Show when toggled */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.user-form-container h2 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  color: #6f4e37;
+}
+
+.user-form-container input,
+.user-form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.user-form-container label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-form-container input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.user-form-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.user-save-btn {
+  background-color: #4caf50; /* Green save button */
+}
+
+.user-save-btn:hover {
+  background-color: #45a049;
+}
+
+.user-cancel-btn {
+  background-color: #f44336; /* Red cancel button */
+}
+
+.user-cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.user-status.active-status {
+  color: #4caf50; /* Green for Active */
+  font-weight: bold;
+}
+
+.user-status.inactive-status {
+  color: #f44336; /* Red for Inactive */
+  font-weight: bold;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

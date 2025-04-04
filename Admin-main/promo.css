@@ -1,0 +1,337 @@
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f5ebe0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrolling when pop-ups are active */
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  flex-shrink: 0;
+  width: 260px;
+  height: 100%;
+  background-color: #6f4e37;
+  color: #fdf8f4; /* Changed from #ffffff */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d7ccc8;
+  background-color: #8c5a43;
+  border-bottom: 1px solid #d7ccc8;
+}
+
+.menu {
+  flex-grow: 1;
+  padding: 20px 0;
+  list-style: none;
+  margin: 0;
+}
+
+.menu-item {
+  margin: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #d7ccc8;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.menu-link i {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.menu-link:hover {
+  background-color: #8c5a43;
+  color: #ffffff;
+}
+
+.menu-item.active .menu-link {
+  background-color: #d9a064;
+  color: #ffffff;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fdf8f4; /* Changed from #ffffff */
+  overflow-y: auto;
+}
+
+.main-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #6f4e37;
+}
+
+/* Controls Section */
+.promo-controls-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Buttons: Add Promo, Fetch All */
+.promo-action-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  background-color: #8c5a43; /* Dark brown consistent color */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.promo-action-btn:hover {
+  background-color: #75412b; /* Slightly darker shade for hover */
+  transform: scale(1.05); /* Add subtle hover effect */
+}
+
+/* Dropdown Filters: Is Active */
+.promo-filter-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #6f4e37; /* Matches sidebar color for consistency */
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.promo-filter-select:focus {
+  border-color: #8c5a43; /* Highlight when focused */
+  outline: none; /* Remove default outline */
+}
+
+/* Container for the search input and icon */
+.promo-search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Style for the search input */
+.promo-filter-search {
+  padding: 0.5em 2.5em 0.5em 0.5em; /* Add padding for the search icon */
+  margin-left: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus outline for the search input */
+.promo-filter-search:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Style for the search icon */
+.promo-search-icon {
+  position: absolute;
+  right: 10px;
+  color: #999;
+  font-size: 1.2em;
+  pointer-events: none; /* Prevents the icon from interfering with input focus */
+}
+
+/* Promo Items View */
+.promo-items-container {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.promo-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.promo-item-details {
+  flex-grow: 1;
+}
+
+.promo-item-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.promo-item-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Styling for Edit and Delete Buttons */
+.promo-item-actions button {
+    background-color: #8c5a43; /* Brown color */
+    border: none; /* Remove default button border */
+    cursor: pointer;
+    padding: 15px; /* Increase padding for larger buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    width: 50px; /* Make buttons square */
+    height: 50px; /* Make buttons square */
+}
+
+.promo-item-actions button i {
+    font-size: 20px; /* Adjust icon size */
+    color: #ffffff; /* White icon color for contrast */
+    pointer-events: none; /* Prevent the icon from intercepting clicks */
+}
+
+.promo-item-actions button.edit-btn:hover {
+    background-color: #4caf50; /* Green for edit button hover */
+}
+
+.promo-item-actions button.delete-btn:hover {
+    background-color: #f44336; /* Red for delete button hover */
+}
+
+.promo-item-actions button.edit-btn:hover i,
+.promo-item-actions button.delete-btn:hover i {
+    color: #ffffff; /* Keep white icon color on hover */
+}
+
+/* Form Pop-Ups (Shared with Add/Edit Promo Form) */
+.promo-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: #fdf8f4; /* Changed from #ffffff */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  display: none; /* Default hidden */
+}
+
+.promo-form-container.hidden {
+  display: none; /* Default hidden with "hidden" class */
+}
+
+.promo-form-container.visible {
+  display: block; /* Show when toggled */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.promo-form-container h2 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  color: #6f4e37;
+}
+
+.promo-form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.promo-form-container label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.promo-form-container input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.promo-form-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.promo-save-btn {
+  background-color: #4caf50; /* Green save button */
+}
+
+.promo-save-btn:hover {
+  background-color: #45a049;
+}
+
+.promo-cancel-btn {
+  background-color: #f44336; /* Red cancel button */
+}
+
+.promo-cancel-btn:hover {
+  background-color: #d32f2f;
+}
+
+.promo-status.active-status {
+  color: #4caf50; /* Green for Active */
+  font-weight: bold;
+}
+
+.promo-status.inactive-status {
+  color: #f44336; /* Red for Inactive */
+  font-weight: bold;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

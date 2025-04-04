@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sora', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000; /* Fallback for when the video doesn't load */
+}
+
+/* Background Video Styling */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* Ensures video is behind everything */
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+    background: rgba(0, 0, 0, 0.2); /* Dark overlay for better text contrast */
+    z-index: -1; /* Positioned above the video but below all content */
+}
+
+/* Header Styling */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
+}
+
+/* Logo Styling */
+.header .logo img {
+    width: auto; /* Maintain aspect ratio */
+    max-height: 120px; /* Ensure logo fits within the header */
+    object-fit: contain; /* Ensures logo scales properly */
+}
+
+/* Section Styling */
+.home {
+    position: relative;
+    z-index: 1; /* Ensures it appears above the video */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Full height of the viewport */
+    padding: 20px;
+    gap: 40px; /* Space between the content and login form */
+}
+
+
+
+/* Login Form Wrapper */
+.wrapper-login {
+    flex: 1;
+    max-width: 55%;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(40px); 
+    -webkit-backdrop-filter: blur(40px); 
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 960px;
+    text-align: center;
+    color: white;
+    height: 48%; /* Consistent height for the form */
+    margin-top: -5%;
+}
+
+/* Login Form Header */
+.wrapper-login h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Input Box Styling */
+.wrapper-login .input-box {
+    position: relative;
+    width: 100%;
+    height: 55px;
+    margin-bottom: 45px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 110%;
+    background: transparent;
+    border: 1px solid #fff;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 25px 0 55px;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 55px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    font-size: .8em;
+    top: -14px;
+    left: 35px;
+}
+
+/* Show Password icon */
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.mail-icon{
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: -10px;
+}
+
+.password-icon{
+    position: absolute;
+    left: 5%;
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: -10px;
+}
+
+
+.toggle-password {
+    position: absolute;
+    right: 31px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.toggle-password:hover {
+    color: #C67C4E;
+}
+
+
+
+/* Submit Button Styling */
+.wrapper-login .submit-btn {
+    width: 100%; 
+    height: 60px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #1e0b04, #71412a);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, .5);
+    cursor: pointer;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 500;
+    padding: 0 20px; 
+    transition:  0.3s ease, outline 0.3s ease;
+    margin-top: 20px;
+}
+
+.wrapper-login .submit-btn:hover {
+    background: transparent;
+    outline: 2px solid #C67C4E; 
+}

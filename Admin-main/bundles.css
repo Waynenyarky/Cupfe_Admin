@@ -1,0 +1,217 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f5ebe0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling when pop-ups are active */
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    flex-shrink: 0;
+    width: 260px;
+    height: 100%;
+    background-color: #6f4e37;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #d7ccc8;
+    background-color: #8c5a43;
+    border-bottom: 1px solid #d7ccc8;
+}
+
+.menu {
+    flex-grow: 1;
+    padding: 20px 0;
+    list-style: none;
+    margin: 0;
+}
+
+.menu-item {
+    margin: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #d7ccc8;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.menu-link i {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.menu-link:hover {
+    background-color: #8c5a43;
+    color: #ffffff;
+}
+
+.menu-item.active .menu-link {
+    background-color: #d9a064;
+    color: #ffffff;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.main-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #6f4e37;
+}
+
+/* Controls Section */
+.bundle-controls-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Buttons: Refresh Bundles */
+.bundle-action-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    background-color: #8c5a43; /* Dark brown consistent color */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.bundle-action-btn:hover {
+    background-color: #75412b; /* Slightly darker shade for hover */
+    transform: scale(1.05); /* Add subtle hover effect */
+}
+
+/* Dropdown Filters: Bundle Type */
+.bundle-filter-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #6f4e37; /* Matches sidebar color for consistency */
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.bundle-filter-select:focus {
+    border-color: #8c5a43; /* Highlight when focused */
+    outline: none; /* Remove default outline */
+}
+
+/* Container for the search input and icon */
+.bundle-search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Style for the search input */
+.bundle-filter-search {
+    padding: 0.5em 2.5em 0.5em 0.5em; /* Add padding for the search icon */
+    margin-left: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 200px;
+    transition: border-color 0.3s ease;
+}
+
+.bundle-filter-search:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Style for the search icon */
+.bundle-search-icon {
+    position: absolute;
+    right: 10px;
+    color: #999;
+    font-size: 1.2em;
+    pointer-events: none; /* Prevents the icon from interfering with input focus */
+}
+
+/* Bundles View - Grid Layout */
+.bundle-items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between grid items */
+    padding: 20px;
+}
+
+/* Individual Bundle Item */
+.bundle-item-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+}
+
+.bundle-item-details {
+    flex-grow: 1;
+}
+
+.bundle-item-details p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.bundle-item-details label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Payment Status Tag */
+.bundle-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.bundle-status.paid {
+    background-color: #4caf50; /* Green for Paid */
+}
+
+.bundle-status.unpaid {
+    background-color: #f44336; /* Red for Unpaid */
+}

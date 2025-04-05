@@ -6,6 +6,9 @@
     <title>CupfeExpresso | Table Reservation Payment</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
+        *, *::before, *::after {
+        box-sizing: border-box;
+        }
         /* Updated body styling */
         body {
             font-family: Arial, sans-serif;
@@ -149,12 +152,12 @@
                 <input type="text" id="reference-number" placeholder="Enter your reference number" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
                 <label for="card-element">Card Details</label>

@@ -2,7 +2,7 @@
 // Include database connection and necessary models
 include_once __DIR__ . '/../config/database.php';
 
-echo "Starting DeleteUnpaidOrders script...\n";
+echo "Starting UpdateUnpaidOrders script...\n";
 
 try {
     // Create a database connection
@@ -11,20 +11,24 @@ try {
 
     echo "[" . date('Y-m-d H:i:s') . "] Database connection established.\n";
 
-    // Infinite loop to check and delete unpaid orders
+    // Infinite loop to check and update unpaid orders
     while (true) {
         try {
-            // Query to delete unpaid orders older than 30 minutes
-            $query = "DELETE FROM orders WHERE payment_status = 'Unpaid' AND created_at < NOW() - INTERVAL 2 MINUTE";
+            // Query to update unpaid orders where est_time is at least 1 hour older than the current time
+            $query = "UPDATE orders 
+                      SET status = 'cancelled', 
+                          reason = 'Failed to pay on time (exceeded 1 hr grace period after est time of arrival)' 
+                      WHERE payment_status = 'Unpaid' 
+                      AND est_time < SUBTIME(TIME(NOW()), '01:00:00')";
             $stmt = $db->prepare($query);
             $stmt->execute();
 
-            // Log the number of deleted rows
-            $deletedRows = $stmt->rowCount();
-            echo "[" . date('Y-m-d H:i:s') . "] Deleted $deletedRows unpaid orders.\n";
+            // Log the number of updated rows
+            $updatedRows = $stmt->rowCount();
+            echo "[" . date('Y-m-d H:i:s') . "] Updated $updatedRows unpaid orders to cancelled based on est_time.\n";
         } catch (Exception $e) {
             // Log any errors
-            echo "[" . date('Y-m-d H:i:s') . "] Error during deletion: " . $e->getMessage() . "\n";
+            echo "[" . date('Y-m-d H:i:s') . "] Error during update: " . $e->getMessage() . "\n";
         }
 
         // Wait 60 seconds before checking again

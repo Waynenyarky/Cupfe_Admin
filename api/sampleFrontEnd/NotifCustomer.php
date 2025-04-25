@@ -36,10 +36,10 @@
     <button id="fetchNotifications" style="display: none;">Fetch All Notifications</button>
 
     <script>
-        const apiUrl = 'http://192.168.1.5/expresso-cafe/api/users/login'; // Login API URL
-        const orderStatusApiUrl = 'http://192.168.1.5/expresso-cafe/api/orders/search-by-reference-number'; // Order status API URL
-        const notificationsApiUrl = 'http://192.168.1.5/expresso-cafe/api/notifications'; // Notifications API URL
-        const wsUrl = 'ws://192.168.1.5:8080'; // WebSocket server URL
+        const apiUrl = 'http://192.168.1.20/expresso-cafe/api/users/login'; // Login API URL
+        const orderStatusApiUrl = 'http://192.168.1.20/expresso-cafe/api/orders/search-by-reference-number'; // Order status API URL
+        const notificationsApiUrl = 'http://192.168.1.20/expresso-cafe/api/notifications'; // Notifications API URL
+        const wsUrl = 'ws://192.168.1.20:8080'; // WebSocket server URL
         let ws; // WebSocket connection
         let reconnectAttempts = 0; // Track reconnect attempts
         let userEmail; // Store user email for fetching notifications

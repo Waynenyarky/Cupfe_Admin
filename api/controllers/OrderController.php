@@ -70,7 +70,12 @@ switch ($request_method) {
     case 'POST':
         // Create a new order with items
         $data = json_decode(file_get_contents("php://input"));
-        if (!empty($data->reference_number) && !empty($data->username) && !empty($data->email) && !empty($data->total_amount) && !empty($data->status) && !empty($data->order_type) && !empty($data->payment_method) && !empty($data->payment_status) && !empty($data->order_items) && is_array($data->order_items)) {
+    
+        if (!empty($data->reference_number) && !empty($data->username) && !empty($data->email) &&
+            !empty($data->total_amount) && !empty($data->status) && !empty($data->order_type) &&
+            !empty($data->payment_method) && !empty($data->payment_status) && !empty($data->order_items) &&
+            is_array($data->order_items) && isset($data->est_time) && isset($data->reason)) { // Added fields
+    
             $order->reference_number = $data->reference_number;
             $order->username = $data->username;
             $order->email = $data->email;
@@ -80,10 +85,12 @@ switch ($request_method) {
             $order->order_type = $data->order_type;
             $order->payment_method = $data->payment_method;
             $order->payment_status = $data->payment_status;
-
+            $order->est_time = $data->est_time; // New estimated time field
+            $order->reason = $data->reason; // New reason field
+    
             // Log the incoming data for debugging
             error_log("Creating order: " . json_encode($data));
-
+    
             if ($order->createWithItems($data->order_items)) {
                 http_response_code(201);
                 echo json_encode(["message" => "Order and items were created."]);
@@ -95,7 +102,7 @@ switch ($request_method) {
         } else {
             error_log("Incomplete data: " . json_encode($data));
             http_response_code(400);
-            echo json_encode(["message" => "Incomplete data."]);
+            echo json_encode(["message" => "Incomplete data. Reference number, username, email, total amount, status, order type, payment method, payment status, estimated time, reason, and order items are required."]);
         }
         break;
 

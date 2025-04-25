@@ -24,6 +24,8 @@ class Order {
     public $order_type;
     public $payment_method;
     public $payment_status;
+    public $est_time;
+    public $reason;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -31,8 +33,9 @@ class Order {
 
     // Create a new order
     public function create() {
-        $query = "INSERT INTO " . $this->table_name . " (reference_number, username, email, total_amount, status, promo_code, order_type, payment_method, payment_status) 
-                  VALUES (:reference_number, :username, :email, :total_amount, :status, :promo_code, :order_type, :payment_method, :payment_status)";
+        $query = "INSERT INTO " . $this->table_name . " 
+                (reference_number, username, email, total_amount, status, promo_code, order_type, payment_method, payment_status, est_time, reason) 
+                VALUES (:reference_number, :username, :email, :total_amount, :status, :promo_code, :order_type, :payment_method, :payment_status, :est_time, :reason)";
         $stmt = $this->conn->prepare($query);
 
         $this->sanitizeProperties();
@@ -43,14 +46,18 @@ class Order {
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":total_amount", $this->total_amount);
         $stmt->bindParam(":status", $this->status);
+        
         if ($this->promo_code === null) {
             $stmt->bindValue(":promo_code", null, PDO::PARAM_NULL);
         } else {
             $stmt->bindParam(":promo_code", $this->promo_code);
         }
+
         $stmt->bindParam(":order_type", $this->order_type);
         $stmt->bindParam(":payment_method", $this->payment_method);
         $stmt->bindParam(":payment_status", $this->payment_status);
+        $stmt->bindParam(":est_time", $this->est_time); // New field: Estimated Time
+        $stmt->bindParam(":reason", $this->reason); // New field: Reason
 
         try {
             if ($stmt->execute()) {
@@ -108,9 +115,9 @@ class Order {
 
     // Retrieve order by ID
     public function read() {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  WHERE id = ?";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id);
         $stmt->execute();
@@ -119,10 +126,10 @@ class Order {
 
     // Retrieve all orders by payment status
     public function readAllByPaymentStatus($payment_status) {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  WHERE payment_status = ? 
-                  ORDER BY updated_at DESC";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                WHERE payment_status = ? 
+                ORDER BY updated_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $payment_status);
         $stmt->execute();
@@ -131,9 +138,9 @@ class Order {
 
     // Retrieve all orders
     public function readAll() {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  ORDER BY updated_at DESC";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                ORDER BY updated_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -141,10 +148,10 @@ class Order {
 
     // Retrieve all orders by order status
     public function readAllByOrderStatus($status) {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  WHERE status = ? 
-                  ORDER BY updated_at DESC";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                WHERE status = ? 
+                ORDER BY updated_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $status);
         $stmt->execute();
@@ -153,10 +160,10 @@ class Order {
 
     // Retrieve all orders by order type
     public function readAllByOrderType($order_type) {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  WHERE order_type = ? 
-                  ORDER BY updated_at DESC";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                WHERE order_type = ? 
+                ORDER BY updated_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $order_type);
         $stmt->execute();
@@ -165,10 +172,10 @@ class Order {
 
     // Search order by reference number
     public function searchByReferenceNumber($reference_number) {
-        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status 
-                  FROM " . $this->table_name . " 
-                  WHERE reference_number = ? 
-                  ORDER BY updated_at DESC";
+        $query = "SELECT id, reference_number, username, email, total_amount, status, promo_code, created_at, updated_at, order_type, payment_method, payment_status, est_time, reason
+                FROM " . $this->table_name . " 
+                WHERE reference_number = ? 
+                ORDER BY updated_at DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $reference_number);
         $stmt->execute();
@@ -353,7 +360,8 @@ class Order {
             $properties = [
                 'reference_number', 'username', 'email', 
                 'total_amount', 'status', 'promo_code', 
-                'order_type', 'payment_method', 'payment_status', 'created_at', 'updated_at'
+                'order_type', 'payment_method', 'payment_status', 
+                'created_at', 'updated_at', 'est_time', 'reason' // Added new fields
             ];
         }
 
@@ -362,12 +370,15 @@ class Order {
             $this->$property = htmlspecialchars(strip_tags($this->$property ?? ''));
 
             // Typecast numeric fields explicitly
-            if (in_array($property, ['total_amount'], true)) {
+            if ($property === 'total_amount') {
                 $this->$property = is_numeric($this->$property) ? (float)$this->$property : 0.0;
+            }
+
+            // Handle est_time as a TIME value
+            if ($property === 'est_time' && !empty($this->$property)) {
+                $this->$property = date('H:i:s', strtotime($this->$property));
             }
         }
     }
-
-
 }
 ?>

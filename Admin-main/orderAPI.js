@@ -70,7 +70,7 @@ const searchOrderByReferenceNumber = async (referenceNumber) => {
 };
 
 /** Update payment status */
-const updatePaymentStatus = async (referenceNumber, paymentStatus, email, username, token) => {
+const updatePaymentStatus = async (referenceNumber, paymentStatus, email, username, token, est_time, reason) => {
     try {
         const response = await fetch(`${API_URL}/update-payment-status`, {
             method: "PUT",
@@ -83,6 +83,8 @@ const updatePaymentStatus = async (referenceNumber, paymentStatus, email, userna
                 payment_status: paymentStatus,    // Payment status
                 email,                            // Customer email
                 username,                         // Customer username
+                est_time, 
+                reason
             }),
         });
         if (!response.ok) throw new Error("Failed to update payment status.");
@@ -94,7 +96,7 @@ const updatePaymentStatus = async (referenceNumber, paymentStatus, email, userna
 };
 
 /** Update order status */
-const updateOrderStatus = async (referenceNumber, status, email, token) => {
+const updateOrderStatus = async (referenceNumber, status, email, token, est_time, reason) => {
     try {
         const response = await fetch(`${API_URL}/update-order-status`, {
             method: "PUT",
@@ -102,7 +104,13 @@ const updateOrderStatus = async (referenceNumber, status, email, token) => {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`, // Include the token in the Authorization header
             },
-            body: JSON.stringify({ reference_number: referenceNumber, status, email }),
+            body: JSON.stringify({ 
+                reference_number: referenceNumber, 
+                status, 
+                email,
+                est_time, 
+                reason    
+            }),
         });
 
         if (!response.ok) {
@@ -171,6 +179,8 @@ const generateNotifOrder = async (notifData, token) => {
                 reference_number: notifData.reference_number,
                 status: notifData.status,
                 created_at: notifData.created_at,
+                est_time: notifData.est_time, // New: Estimated Time
+                reason: notifData.reason      // New: Reason
             }),
         });
 

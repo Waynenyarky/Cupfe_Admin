@@ -26,6 +26,22 @@ let allOrders = [];
 // Utility Functions
 
 /**
+ * Converts a 24-hour time (e.g., "14:30") to 12-hour format (e.g., "2:30 PM")
+ * @param {string} timeStr
+ * @returns {string}
+ */
+const convertTo12HourFormat = (timeStr) => {
+    if (!timeStr) return "N/A";
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    if (isNaN(hours) || isNaN(minutes)) return "N/A";
+
+    const period = hours >= 12 ? "PM" : "AM";
+    const adjustedHours = hours % 12 || 12; // 0 becomes 12
+    return `${adjustedHours}:${minutes.toString().padStart(2, "0")} ${period}`;
+};
+
+
+/**
  * Render orders in the container
  * @param {Array} orders - The list of orders
  */
@@ -67,10 +83,14 @@ const renderOrders = (orders) => {
                         <option value="" disabled selected>Update Order Status</option>
                         <option value="pending">Pending</option>
                         <option value="preparing">Preparing</option>
-                        <option value="serving">serving</option>
+                        <option value="serving">Serving</option>
                         <option value="completed">Completed</option>
                         <option value="canceled">Canceled</option>
                     </select>
+                </p>
+                <p>
+                    <label>Estimated Time: </label>
+                    <span>${order.est_time ? convertTo12HourFormat(order.est_time) : "N/A"}</span>
                 </p>
             </div>
             <div class="order-item-actions">

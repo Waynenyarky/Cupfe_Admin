@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_token'])) {
                 <i class="fas fa-angle-left"></i> <!-- Icon for collapse -->
             </button>
             <div class="sidebar-header">
-                <img src="main_logo.png" alt="Cupfe Expresso" id="logo">
+            <img src="main_logo_light.png" alt="Cupfe Expresso" id="logo">
                 <p id="adminUsername" class="admin-username"></p>
             </div>
             <ul class="menu">

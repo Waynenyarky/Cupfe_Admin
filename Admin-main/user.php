@@ -120,11 +120,6 @@ if (!isset($_SESSION['user_token'])) {
                     <input type="password" id="user-password" name="password" placeholder="Password" required>
 
                     <!-- Show Password Toggle Below Password Field -->
-                    <div style="margin: 5px 0;">
-                         <label for="toggle-password-visibility">
-                         <input type="checkbox" id="toggle-password-visibility" style="margin-right: 5px;"> Show Password
-                         </label>
-                    </div>
                     <select id="user-role" name="role" class="user-role-select" required>
                          <option value="">Select Role</option>
                          <option value="admin">Admin</option>
@@ -181,11 +176,6 @@ if (!isset($_SESSION['user_token'])) {
                     <label for="change-password-new-password">New Password</label>
                     <input type="password" id="change-password-new-password" name="new_password" placeholder="Enter New Password" required>
 
-                    <!-- Show Password Toggle -->
-                    <div style="margin: 5px 0;">
-                         <input type="checkbox" id="toggle-change-password-visibility" style="margin-right: 5px;">
-                         <label for="toggle-change-password-visibility">Show Password</label>
-                    </div>
 
                     <!-- CAPTCHA Section -->
                     <div id="captcha-container" style="margin: 10px 0;">
